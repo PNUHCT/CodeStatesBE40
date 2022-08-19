@@ -27,6 +27,15 @@ public class MemberController {
 
     //---------------- 여기서 부터 아래에 코드를 구현하세요! -------------------//
     // 1. 회원 정보 수정을 위한 핸들러 메서드 구현
+    @PostMapping
+    public ResponseEntity updatePhone(@RequestParam("phone") String phone){
+        members.get(1L).put("phone", phone);
+        return new ResponseEntity<>(members,HttpStatus.OK);
+    }
     // 2. 회원 정보 삭제를 위한 핸들러 메서드 구현
-
+    @DeleteMapping
+    public ResponseEntity deleteMember() {
+        members.clear();
+        return new ResponseEntity<>(members, HttpStatus.NO_CONTENT);
+    }
 }
