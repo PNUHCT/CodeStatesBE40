@@ -27,15 +27,39 @@ public class MemberController {
 
     //---------------- 여기서 부터 아래에 코드를 구현하세요! -------------------//
     // 1. 회원 정보 수정을 위한 핸들러 메서드 구현
-    @PostMapping
+    // 메서드에서 멤버 아이디를 고정시키는 방법
+    @PatchMapping
     public ResponseEntity updatePhone(@RequestParam("phone") String phone){
         members.get(1L).put("phone", phone);
         return new ResponseEntity<>(members,HttpStatus.OK);
     }
-    // 2. 회원 정보 삭제를 위한 핸들러 메서드 구현
+
+    // URL 자체에 멤버 아이디 넣어주는 방법 1
+    @PatchMapping ("/{memberId}")
+    public ResponseEntity updatePhone(@PathVariable("memberId") long memberId, @RequestParam("phone") String phone){
+        members.get(memberId).put("phone", phone);
+        return new ResponseEntity<>(members,HttpStatus.OK);
+    }
+
+//    // URL 자체에 멤버 아이디 넣어주는 방법 2
+//    @PatchMapping ("/{memberId}")
+//    public ResponseEntity updatePhone(@PathVariable("memberId") long memberId, @RequestParam("phone") String phone){
+//        Map<String, Object> memberA = members.get(memberId);
+//        memberA.put("phone", phone);
+//        return new ResponseEntity<>(members,HttpStatus.OK);
+//    }
+
+    // 2. 회원 정보 삭제를 위한 핸들러 메서드 구현 (ver clear)
     @DeleteMapping
     public ResponseEntity deleteMember() {
         members.clear();
+        return new ResponseEntity<>(members, HttpStatus.NO_CONTENT);
+    }
+
+    // 3. 회원 정보 삭제를 위한 핸들러 메서드 구현 (ver remove)
+    @DeleteMapping
+    public ResponseEntity deleteMember(@RequestParam("memberId") long memberId) {
+        members.remove(memberId);
         return new ResponseEntity<>(members, HttpStatus.NO_CONTENT);
     }
 }
