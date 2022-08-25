@@ -23,7 +23,7 @@ import java.util.List;
  * - @ExceptionHandler 적용
  */
 @RestController
-@RequestMapping("/v10/members")
+@RequestMapping("/v10/members") // 공통 URL 입력
 @Validated
 @Slf4j
 public class MemberController {

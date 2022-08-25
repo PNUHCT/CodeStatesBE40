@@ -49,8 +49,8 @@ public class MemberService {
 
     public void deleteMember(long memberId) {
         // TODO should business logic
-
-        String logResult = null;
-        System.out.println(logResult.toUpperCase());
+        throw new BusinessLogicException(ExceptionCode.NULL_POINT_EXCEPTION);
+//        String logResult = null;
+//        System.out.println(logResult.toUpperCase());
     }
 }
