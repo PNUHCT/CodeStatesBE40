@@ -2,5 +2,5 @@ aws:
   paramstore:
     enabled: true
     prefix: /spring-boot-aws
-    name: be-9-PNUHCT
+    name: be-0-SEYUN
     profileSeparator: _
