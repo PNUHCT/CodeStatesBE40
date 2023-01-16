@@ -1,0 +1,36 @@
+{
+  "name": "sw-repo-manager",
+  "version": "0.1.5",
+  "description": "연습문제repo와 정답repo 관리하기",
+  "main": "index.js",
+  "scripts": {
+    "verify": "node ./src/verify.js",
+    "cli:init": "echo \"fork해서 사용하면 이미 만들어져 있을것이다.\" && node ./src/yesno.js && git branch assign && git branch ref && npm run deploy:ref:init && npm run deploy:assign:init",
+    "cli:init:ref": "mkdir ./im-repo-manager-ref && cd ./im-repo-manager-ref && git init && touch README.md && git add . && git commit -m 'init' && cd .. ",
+    "cli:init:assign": "mkdir ./im-repo-manager && cd ./im-repo-manager && git init && touch README.md && git add . && git commit -m 'init' && cd .. ",
+    "cli:versioning": "git status && echo \"수강생에게 필요없는 코드는 ./.sw-repo-ignore 에 넣어주세요. \n코드가 모두 커밋되었나요.\" && node ./src/yesno.js && standard-version",
+    "cli:deploy:assign": "git checkout assign && cd ./im-repo-manager && git reset --hard HEAD~1 && cp ../sw-repo-manager-main/* ./ && git add . && git commit -m 'ref' && cd .. && git checkout main",
+    "cli:deploy:ref": "git checkout ref && cd ./im-repo-manager && git reset --hard HEAD~1 && cp ../sw-repo-manager-main/* ./ && git add . && git commit -m 'ref' && cd .. && git checkout main",
+    "cli:deploy:ref:fix": "cd ./im-repo-manager-ref && touch fix.md && git add . && git commit -m 'fix: Keep at least 2 commits' && cd .. ",
+    "cli:deploy:assign:fix": "cd ./im-repo-manager && touch fix.md && git add . && git commit -m 'fix: Keep at least 2 commits' && cd .. ",
+    "cli:git-reinit": "false && rm -rf ./.git && git init && git add . && git commit -m 'config: package.json'",
+    "cli:help": "node ./src/index.js"
+  },
+  "author": "Seungwoo, Hong",
+  "license": "MIT",
+  "devDependencies": {
+    "standard-version": "^9.3.2",
+    "yesno": "^0.3.1",
+    "fs-extra": "^10.0.1",
+    "nodegit": "^0.27.0",
+    "signal-exit": "^3.0.7"
+  },
+  "dependencies": {},
+  "swRepoManager": {
+    "assignRepoPath": "project3-microservices-assign",
+    "assignRepoUrl": "git@github.com:cs-devops-bootcamp/project3-microservices-url.git",
+    "refRepoPath": "project3-microservices-ref",
+    "refRepoUrl": "git@github.com:cs-devops-bootcamp/project3-microservices-ref.git",
+    "mainRepoPath": "project3-microservices-main"
+  }
+}
